@@ -1,0 +1,33 @@
+﻿@model ExampleNET.Models.Post
+
+<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+
+<div>
+    <div>
+        <form asp-controller="Post" asp-action="Create" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="All"></div>
+            <div class="form-floating">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="div-box">
+                <textarea asp-for="Desc" id="editor"></textarea>
+                <span asp-validation-for="Desc"></span>
+                </div>
+            <input type="submit" value="Сохранить" />
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+ClassicEditor.create( document.querySelector( '#editor' ) ).then( editor => {
+                                        console.log( editor );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+</script>
+                

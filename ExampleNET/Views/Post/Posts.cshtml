@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var item in Model)
+{
+    <div class="alert alert-success">
+        <p class="alert-heading ">@item.Title</p>
+        <p class="alert-heading">@item.Text</p>
+        <a class="btn btn-warning pull-right" asp-controller="Post" asp-action="Index" asp-route-id="@item.ID">Подробнее</a>
+    
+    
+    @if (User.Identity.Name == "admin@gmail.com")
+    {
+        <a class="btn btn-danger" asp-area="" asp-controller="Post" asp-action="DeletePost" asp-route-id="@item.ID">Удалить</a>
+    }
+    </div>
+}

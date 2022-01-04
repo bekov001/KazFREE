@@ -1,0 +1,53 @@
+﻿@model ExampleNET.Forms.PostViewModel
+@using Humanizer;
+
+<div class="container">
+    <div class="alert alert-primary mt-3" style="word-wrap: break-word;">
+
+
+        <a href="/profile/9"><img class="avatar avatar-32 bg-light rounded-circle text-white" src="https://res.cloudinary.com/hcob5b5ol/image/upload/v1/media/avatars/avatar.jpg" width="32" height="32"></a>
+        <a asp-controller="Profile" asp-action="Index" asp-route-id="@Model.user.Id" id="link">@Model.user.Email</a>
+        <h1>@Model.post.Title</h1>
+
+        @Html.Raw(Model.post.Desc)
+
+        <p class="text-end">@Model.post.Time.Humanize()</p>
+
+
+
+    </div>
+    <p>Комментарии @Model.comments.Count</p>
+    <hr>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <partial name="_CreateCommentPartial" />
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <a asp-controller="Profile" asp-action="Register">Зарегиструйтесь чтобы оставлять комментарии</a>
+        </div>
+    }
+
+    @foreach (var comment in Model.comments)
+    {
+        <div class="alert alert-warning">
+            <img class="avatar avatar-32 bg-light rounded-circle text-white" src="https://res.cloudinary.com/hcob5b5ol/image/upload/v1/media/iphone_text_message_hqo5mx" width="32" height="32">
+            <a id="link" asp-controller="Profile" asp-action="Index" asp-route-id="@comment.Author.Id">@comment.Author.Email</a><br><br>
+            <p style="white-space: pre-line">
+                @comment.Text
+            </p>
+            <div class="math"></div>
+
+            <div class="modal-footer">
+                @comment.Time.Humanize()
+                <br>
+            </div>
+        </div>
+    }
+
+
+
+
+</div>

@@ -1,0 +1,12 @@
+﻿@model ExampleNET.Forms.PostViewModel
+
+
+<form method="post" asp-action="CreateComment" asp-controller="Post" asp-antiforgery="true" asp-route-id="@Model.post.ID">
+    <div class="alert alert-primary">
+        <div class="md-form mt-3 mb-4">
+            <textarea class="md-textarea form-control" rows="3" asp-for="Text" placeholder="Описание"></textarea>
+        </div>
+        <hr />
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    </div>
+</form>
